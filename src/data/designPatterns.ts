@@ -138,17 +138,15 @@ abstract class Decorator implements Component {
 
 class ConcreteDecoratorA extends Decorator {
   operation(): string {
-    // Fix: ensure component exists and return a default empty string if operation() is undefined
-    const result = this.component ? this.component.operation() : "";
-    return \`ConcreteDecoratorA(${result})\`;
+    const baseResult = this.component ? this.component.operation() : "";
+    return \`ConcreteDecoratorA(${baseResult})\`;
   }
 }
 
 class ConcreteDecoratorB extends Decorator {
   operation(): string {
-    // Fix: ensure component exists and return a default empty string if operation() is undefined
-    const result = this.component ? this.component.operation() : "";
-    return \`ConcreteDecoratorB(${result})\`;
+    const baseResult = this.component ? this.component.operation() : "";
+    return \`ConcreteDecoratorB(${baseResult})\`;
   }
 }`,
     relatedSOLIDPrinciples: [
@@ -249,9 +247,8 @@ class Adapter implements Target {
   }
 
   request(): string {
-    // Fix: define the variable and use it correctly
-    const specificRequest = this.adaptee.specificRequest();
-    return \`Adapter: (TRANSLATED) ${specificRequest}\`;
+    const adapteeRequest = this.adaptee.specificRequest();
+    return \`Adapter: (TRANSLATED) ${adapteeRequest}\`;
   }
 }
 
