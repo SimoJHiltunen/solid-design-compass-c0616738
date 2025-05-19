@@ -138,14 +138,14 @@ abstract class Decorator implements Component {
 
 class ConcreteDecoratorA extends Decorator {
   operation(): string {
-    // Fix: added null/undefined check before accessing operation method
+    // Fixed: using optional chaining and providing default value
     return \`ConcreteDecoratorA(${this.component?.operation() || ""})\`;
   }
 }
 
 class ConcreteDecoratorB extends Decorator {
   operation(): string {
-    // Fix: added null/undefined check before accessing operation method
+    // Fixed: using optional chaining and providing default value
     return \`ConcreteDecoratorB(${this.component?.operation() || ""})\`;
   }
 }`,
@@ -247,7 +247,7 @@ class Adapter implements Target {
   }
 
   request(): string {
-    // Fix: corrected variable name from specificResult to specRequest
+    // Fixed: corrected variable name and made sure it's defined
     const specRequest = this.adaptee.specificRequest();
     return \`Adapter: (TRANSLATED) ${specRequest}\`;
   }
