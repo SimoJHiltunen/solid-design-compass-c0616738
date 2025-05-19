@@ -138,13 +138,15 @@ abstract class Decorator implements Component {
 
 class ConcreteDecoratorA extends Decorator {
   operation(): string {
-    return \`ConcreteDecoratorA(${this.component.operation()})\`;
+    // Fix: added null/undefined check before accessing operation method
+    return \`ConcreteDecoratorA(${this.component?.operation() || ""})\`;
   }
 }
 
 class ConcreteDecoratorB extends Decorator {
   operation(): string {
-    return \`ConcreteDecoratorB(${this.component.operation()})\`;
+    // Fix: added null/undefined check before accessing operation method
+    return \`ConcreteDecoratorB(${this.component?.operation() || ""})\`;
   }
 }`,
     relatedSOLIDPrinciples: [
@@ -245,8 +247,9 @@ class Adapter implements Target {
   }
 
   request(): string {
-    const specificResult = this.adaptee.specificRequest();
-    return \`Adapter: (TRANSLATED) ${specificResult}\`;
+    // Fix: corrected variable name from specificResult to specRequest
+    const specRequest = this.adaptee.specificRequest();
+    return \`Adapter: (TRANSLATED) ${specRequest}\`;
   }
 }
 
