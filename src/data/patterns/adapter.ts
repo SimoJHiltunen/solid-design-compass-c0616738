@@ -25,7 +25,7 @@ class Adapter implements Target {
 
   request(): string {
     const result = this.adaptee.specificRequest();
-    return \`Adapter: (TRANSLATED) ${result}\`;
+    return \`Adapter: (TRANSLATED) \${result}\`;
   }
 }
 

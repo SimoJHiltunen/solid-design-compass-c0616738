@@ -31,14 +31,14 @@ abstract class Decorator implements Component {
 class ConcreteDecoratorA extends Decorator {
   operation(): string {
     const result = super.operation();
-    return \`ConcreteDecoratorA(${result})\`;
+    return \`ConcreteDecoratorA(\${result})\`;
   }
 }
 
 class ConcreteDecoratorB extends Decorator {
   operation(): string {
     const result = super.operation();
-    return \`ConcreteDecoratorB(${result})\`;
+    return \`ConcreteDecoratorB(\${result})\`;
   }
 }`,
   relatedSOLIDPrinciples: [
