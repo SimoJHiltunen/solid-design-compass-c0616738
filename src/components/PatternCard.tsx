@@ -54,7 +54,7 @@ const PatternCard: React.FC<PatternCardProps> = ({
         <div className="animate-fade-in">
           <div className="mb-6">
             <h5 className="mb-2 font-medium">Code Examples:</h5>
-            <Tabs defaultValue="typescript">
+            <Tabs defaultValue={supportedLanguages[0].toLowerCase()}>
               <TabsList>
                 {supportedLanguages.map(lang => (
                   <TabsTrigger key={lang.toLowerCase()} value={lang.toLowerCase()}>
@@ -62,19 +62,21 @@ const PatternCard: React.FC<PatternCardProps> = ({
                   </TabsTrigger>
                 ))}
               </TabsList>
-              <TabsContent value="typescript">
-                <pre className="bg-secondary p-4 rounded-md overflow-x-auto text-sm">
-                  <code>{codeExample}</code>
-                </pre>
-              </TabsContent>
-              {codeExamplePHP && (
+              {supportedLanguages.includes("TypeScript") && (
+                <TabsContent value="typescript">
+                  <pre className="bg-secondary p-4 rounded-md overflow-x-auto text-sm">
+                    <code>{codeExample}</code>
+                  </pre>
+                </TabsContent>
+              )}
+              {supportedLanguages.includes("PHP") && codeExamplePHP && (
                 <TabsContent value="php">
                   <pre className="bg-secondary p-4 rounded-md overflow-x-auto text-sm">
                     <code>{codeExamplePHP}</code>
                   </pre>
                 </TabsContent>
               )}
-              {codeExamplePython && (
+              {supportedLanguages.includes("Python") && codeExamplePython && (
                 <TabsContent value="python">
                   <pre className="bg-secondary p-4 rounded-md overflow-x-auto text-sm">
                     <code>{codeExamplePython}</code>
