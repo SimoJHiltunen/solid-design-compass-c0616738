@@ -1,12 +1,16 @@
 
 import React, { useState } from 'react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export interface PatternCardProps {
   title: string;
   shortName: string;
   description: string;
   codeExample: string;
+  codeExamplePHP?: string;
+  codeExamplePython?: string;
+  supportedLanguages?: string[];
   relatedSOLIDPrinciples: Array<{
     name: string;
     description: string;
@@ -18,6 +22,9 @@ const PatternCard: React.FC<PatternCardProps> = ({
   shortName,
   description,
   codeExample,
+  codeExamplePHP,
+  codeExamplePython,
+  supportedLanguages = ["TypeScript"],
   relatedSOLIDPrinciples
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -46,10 +53,35 @@ const PatternCard: React.FC<PatternCardProps> = ({
       {isExpanded && (
         <div className="animate-fade-in">
           <div className="mb-6">
-            <h5 className="mb-2 font-medium">Code Example:</h5>
-            <pre className="bg-secondary p-4 rounded-md overflow-x-auto text-sm">
-              <code>{codeExample}</code>
-            </pre>
+            <h5 className="mb-2 font-medium">Code Examples:</h5>
+            <Tabs defaultValue="typescript">
+              <TabsList>
+                {supportedLanguages.map(lang => (
+                  <TabsTrigger key={lang.toLowerCase()} value={lang.toLowerCase()}>
+                    {lang}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+              <TabsContent value="typescript">
+                <pre className="bg-secondary p-4 rounded-md overflow-x-auto text-sm">
+                  <code>{codeExample}</code>
+                </pre>
+              </TabsContent>
+              {codeExamplePHP && (
+                <TabsContent value="php">
+                  <pre className="bg-secondary p-4 rounded-md overflow-x-auto text-sm">
+                    <code>{codeExamplePHP}</code>
+                  </pre>
+                </TabsContent>
+              )}
+              {codeExamplePython && (
+                <TabsContent value="python">
+                  <pre className="bg-secondary p-4 rounded-md overflow-x-auto text-sm">
+                    <code>{codeExamplePython}</code>
+                  </pre>
+                </TabsContent>
+              )}
+            </Tabs>
           </div>
           
           <div>
