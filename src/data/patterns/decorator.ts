@@ -30,15 +30,15 @@ abstract class Decorator implements Component {
 
 class ConcreteDecoratorA extends Decorator {
   operation(): string {
-    const baseResult = super.operation();
-    return \`ConcreteDecoratorA(${baseResult})\`;
+    const result = super.operation();
+    return \`ConcreteDecoratorA(${result})\`;
   }
 }
 
 class ConcreteDecoratorB extends Decorator {
   operation(): string {
-    const baseResult = super.operation();
-    return \`ConcreteDecoratorB(${baseResult})\`;
+    const result = super.operation();
+    return \`ConcreteDecoratorB(${result})\`;
   }
 }`,
   relatedSOLIDPrinciples: [

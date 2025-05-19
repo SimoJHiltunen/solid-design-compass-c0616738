@@ -24,8 +24,8 @@ class Adapter implements Target {
   }
 
   request(): string {
-    const adapteeRequest = this.adaptee.specificRequest();
-    return \`Adapter: (TRANSLATED) ${adapteeRequest}\`;
+    const result = this.adaptee.specificRequest();
+    return \`Adapter: (TRANSLATED) ${result}\`;
   }
 }
 
