@@ -138,13 +138,13 @@ abstract class Decorator implements Component {
 
 class ConcreteDecoratorA extends Decorator {
   operation(): string {
-    return \`ConcreteDecoratorA(${super.operation()})\`;
+    return \`ConcreteDecoratorA(${this.component.operation()})\`;
   }
 }
 
 class ConcreteDecoratorB extends Decorator {
   operation(): string {
-    return \`ConcreteDecoratorB(${super.operation()})\`;
+    return \`ConcreteDecoratorB(${this.component.operation()})\`;
   }
 }`,
     relatedSOLIDPrinciples: [
@@ -245,8 +245,8 @@ class Adapter implements Target {
   }
 
   request(): string {
-    const result = this.adaptee.specificRequest();
-    return \`Adapter: (TRANSLATED) ${result}\`;
+    const specificResult = this.adaptee.specificRequest();
+    return \`Adapter: (TRANSLATED) ${specificResult}\`;
   }
 }
 

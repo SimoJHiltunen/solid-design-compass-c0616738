@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export interface PatternCardProps {
   title: string;
@@ -55,15 +56,18 @@ const PatternCard: React.FC<PatternCardProps> = ({
             <h5 className="mb-2 font-medium">Related SOLID Principles:</h5>
             <div className="grid grid-cols-1 gap-2">
               {relatedSOLIDPrinciples.map((principle, index) => (
-                <div 
-                  key={index} 
-                  className="has-tooltip flex items-center bg-secondary rounded-md p-2"
-                >
-                  <span className="font-medium text-sm">{principle.name}</span>
-                  <div className="tooltip p-2 bg-popover text-popover-foreground rounded-md shadow-lg text-xs max-w-xs ml-2">
-                    {principle.description}
-                  </div>
-                </div>
+                <TooltipProvider key={index}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div className="flex items-center bg-secondary rounded-md p-2 cursor-help">
+                        <span className="font-medium text-sm">{principle.name}</span>
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p className="max-w-xs text-sm">{principle.description}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               ))}
             </div>
           </div>
