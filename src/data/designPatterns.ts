@@ -138,15 +138,17 @@ abstract class Decorator implements Component {
 
 class ConcreteDecoratorA extends Decorator {
   operation(): string {
-    // Fixed: using optional chaining and providing default value
-    return \`ConcreteDecoratorA(${this.component?.operation() || ""})\`;
+    // Fix: ensure component exists and return a default empty string if operation() is undefined
+    const result = this.component ? this.component.operation() : "";
+    return \`ConcreteDecoratorA(${result})\`;
   }
 }
 
 class ConcreteDecoratorB extends Decorator {
   operation(): string {
-    // Fixed: using optional chaining and providing default value
-    return \`ConcreteDecoratorB(${this.component?.operation() || ""})\`;
+    // Fix: ensure component exists and return a default empty string if operation() is undefined
+    const result = this.component ? this.component.operation() : "";
+    return \`ConcreteDecoratorB(${result})\`;
   }
 }`,
     relatedSOLIDPrinciples: [
@@ -247,9 +249,9 @@ class Adapter implements Target {
   }
 
   request(): string {
-    // Fixed: corrected variable name and made sure it's defined
-    const specRequest = this.adaptee.specificRequest();
-    return \`Adapter: (TRANSLATED) ${specRequest}\`;
+    // Fix: define the variable and use it correctly
+    const specificRequest = this.adaptee.specificRequest();
+    return \`Adapter: (TRANSLATED) ${specificRequest}\`;
   }
 }
 
