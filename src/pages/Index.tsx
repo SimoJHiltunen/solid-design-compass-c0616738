@@ -2,20 +2,14 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
 import PrincipleCard from '../components/PrincipleCard';
+import PatternCard from '../components/PatternCard';
 import RelationshipMatrix from '../components/RelationshipMatrix';
 import Tooltip from '../components/Tooltip';
 import { solidPrinciples, relationshipMatrix } from '../data/solidPrinciples';
+import { designPatterns } from '../data/designPatterns';
 
 const Index = () => {
-  const designPatterns = [
-    "Factory", 
-    "Strategy", 
-    "Decorator", 
-    "Observer", 
-    "Adapter", 
-    "Facade", 
-    "Dependency Injection"
-  ];
+  const patternNames = designPatterns.map(pattern => pattern.shortName);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -44,7 +38,7 @@ const Index = () => {
         
         {/* SOLID Principles Cards */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 pb-4 border-b">The Principles</h2>
+          <h2 className="text-3xl font-bold mb-8 pb-4 border-b">The SOLID Principles</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {solidPrinciples.map((principle, index) => (
               <PrincipleCard 
@@ -54,6 +48,23 @@ const Index = () => {
                 description={principle.description}
                 codeExample={principle.codeExample}
                 designPatterns={principle.designPatterns}
+              />
+            ))}
+          </div>
+        </section>
+        
+        {/* Design Patterns Cards */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold mb-8 pb-4 border-b">Common Design Patterns</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {designPatterns.map((pattern, index) => (
+              <PatternCard 
+                key={index}
+                title={pattern.title}
+                shortName={pattern.shortName}
+                description={pattern.description}
+                codeExample={pattern.codeExample}
+                relatedSOLIDPrinciples={pattern.relatedSOLIDPrinciples}
               />
             ))}
           </div>
@@ -73,7 +84,7 @@ const Index = () => {
           </div>
           <RelationshipMatrix 
             data={relationshipMatrix}
-            patterns={designPatterns}
+            patterns={patternNames}
           />
         </section>
         
@@ -99,6 +110,7 @@ const Index = () => {
                 <li><strong className="font-medium text-primary">Decorator:</strong> <Tooltip text="Attaches additional responsibilities to objects dynamically">Structural pattern for extending functionality</Tooltip></li>
                 <li><strong className="font-medium text-primary">Observer:</strong> <Tooltip text="Defines a one-to-many dependency so that when one object changes state, its dependents are notified">Behavioral pattern for event notification</Tooltip></li>
                 <li><strong className="font-medium text-primary">Adapter:</strong> <Tooltip text="Allows incompatible interfaces to work together">Structural pattern for interface compatibility</Tooltip></li>
+                <li><strong className="font-medium text-primary">DI:</strong> <Tooltip text="A technique where one object supplies the dependencies of another object">Dependency Injection pattern</Tooltip></li>
               </ul>
             </div>
           </div>
